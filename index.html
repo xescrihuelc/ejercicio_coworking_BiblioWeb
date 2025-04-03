@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1 id="tituloH1">BiblioWeb interactivo</h1>
-        <section id="contenedor1">
+        <section id="contenedor1" class="title-container">
             <label for="busqueda">Libros a buscar: </label>
             <input type="text" name="busqueda" id="busqueda" autofocus><br><br>
             <div id="menuFiltro">
@@ -21,6 +21,11 @@
             </div><br>
             <button type="submit" id="botonBusqueda" onclick="buscarPorFiltro()">Buscar</button>
         </section>
+        <section id="contenedor2" class="container,hidden">
+        </section>
+        <section id="contenedor3" class="container,hidden">
+        </section>
+
         <script src="script.js"></script>
     </body>
 </html>
