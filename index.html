@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>BiblioWeb interactivo</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body></body>
+    <body>
+        <h1 id="tituloH1">BiblioWeb interactivo</h1>
+        <section id="contenedor1">
+            <label for="busqueda">Libros a buscar: </label>
+            <input type="text" name="busqueda" id="busqueda" autofocus><br><br>
+            <div id="menuFiltro">
+                <input type="radio" name="filtro" id="titulo" value="titulo" checked>
+                <label for="titulo">Título</label>
+                <input type="radio" name="filtro" id="autor" value="autor">
+                <label for="autor">Autor</label>
+                <input type="radio" name="filtro" id="anio" value="anio">
+                <label for="anio">Año de publicación</label>
+            </div><br>
+            <button type="submit" id="botonBusqueda" onclick="buscarPorFiltro()">Buscar</button>
+        </section>
+        <script src="script.js"></script>
+    </body>
 </html>
