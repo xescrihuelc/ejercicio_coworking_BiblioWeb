@@ -34,5 +34,5 @@ function addToCart(index) {
 
 }
 
-mostrarResultados()
-contenedor2.classList.remove("hidden")
+// mostrarResultados()
+// contenedor2.classList.remove("hidden")
