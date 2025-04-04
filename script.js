@@ -2,22 +2,25 @@
 const contenedor2 = document.getElementById("contenedor2");
 const searchBox = document.getElementById("busqueda");
 
-// Functions
-function mostrarResultados() {
-    let books = new Array();
+function fetchBooks() {
     fetch(`https://openlibrary.org/search.json?q=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
-            books = data.docs;
-            for (let index = 0; index < books.length; index++) {
-                const book = books[index];
-                const card = document.createElement("div");
-                card.classList.add("card");
-                const imageURL = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`;
-                console.log(imageURL);
+            mostrarResultados(data.docs);
+        });
+}
 
-                const authors = book.author_name.join(", ");
-                card.innerHTML = `
+// Functions
+function mostrarResultados(books) {
+    for (let index = 0; index < books.length; index++) {
+        const book = books[index];
+        const card = document.createElement("div");
+        card.classList.add("card");
+        const imageURL = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`;
+        console.log(imageURL);
+
+        const authors = book.author_name.join(", ");
+        card.innerHTML = `
                     <div class="card-image">
                         <img src="${imageURL}" alt="${book.title}">
                     </div>
@@ -27,9 +30,8 @@ function mostrarResultados() {
                         <p><button id="${index}" onclick="addToCart(${index})">Añadir al carrito</button></p>
                     </div>
                 `;
-                contenedor2.appendChild(card);
-            }
-        });
+        contenedor2.appendChild(card);
+    }
 }
 
 function getCartBooks() {
