@@ -2,6 +2,7 @@
 const contenedor2 = document.getElementById("contenedor2");
 const searchBox = document.getElementById("busqueda");
 
+// Functions
 function fetchBooks() {
     fetch(`https://openlibrary.org/search.json?q=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
@@ -10,7 +11,6 @@ function fetchBooks() {
         });
 }
 
-// Functions
 function mostrarResultados(books) {
     for (let index = 0; index < books.length; index++) {
         const book = books[index];
