@@ -29,9 +29,20 @@ function mostrarResultados() {
     }
 }
 
+function getCartBooks() {
+    if (!localStorage.cart) {
+        localStorage.cart = []
+    }
+    let cart = JSON.parse(localStorage.cart)
+    return cart
+}
+
 function addToCart(index) {
     // The book to add to the cart is books[index]
-
+    // First get the cart contents
+    let cart = getCartBooks()
+    cart.push(books[index])
+    localStorage.cart = JSON.stringify(cart)
 }
 
 // mostrarResultados()
