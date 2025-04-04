@@ -4,12 +4,14 @@ const searchBox = document.getElementById("busqueda");
 
 // Functions
 function fetchBooks() {
-    fetch(`https://openlibrary.org/search.json?q=${searchBox.value}&limit=10`)
+    let opcion = document.querySelector('input[name="filtro"]:checked').value;
+        console.log(opcion);
+        fetch(`https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
             mostrarResultados(data.docs);
         });
-}
+    }
 
 function mostrarResultados(books) {
     for (let index = 0; index < books.length; index++) {
