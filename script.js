@@ -32,6 +32,7 @@ function mostrarResultados(books) {
                 `;
         contenedor2.appendChild(card);
     }
+    contenedor2.classList.remove("hidden");
 }
 
 function getCartBooks() {
@@ -51,4 +52,3 @@ function addToCart(index) {
 }
 
 // mostrarResultados()
-// contenedor2.classList.remove("hidden")
