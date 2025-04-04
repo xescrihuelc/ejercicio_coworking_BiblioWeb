@@ -1,5 +1,6 @@
 // Elements obtained from the DOM
 const contenedor2 = document.getElementById("contenedor2");
+const searchBox = document.getElementById("busqueda");
 
 // Functions
 function mostrarResultados() {
