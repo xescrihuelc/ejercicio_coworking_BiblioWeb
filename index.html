@@ -4,30 +4,50 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>BiblioWeb interactivo</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <h1 id="tituloH1">BiblioWeb interactivo</h1>
         <div id="shopping-cart">
-            <img id="cart-img" src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="carrito">
+            <img
+                id="cart-img"
+                src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                alt="carrito"
+            />
             <span id="counter">0</span>
         </div>
         <section id="contenedor1" class="title-container">
             <label for="busqueda">Libros a buscar: </label>
-            <input type="text" name="busqueda" id="busqueda" autofocus><br><br>
+            <input
+                type="text"
+                name="busqueda"
+                id="busqueda"
+                autofocus
+            /><br /><br />
             <div id="menuFiltro">
-                <input type="radio" name="filtro" id="title" value="title" checked>
+                <input
+                    type="radio"
+                    name="filtro"
+                    id="title"
+                    value="title"
+                    checked
+                />
                 <label for="title">Título</label>
-                <input type="radio" name="filtro" id="author" value="author">
+                <input type="radio" name="filtro" id="author" value="author" />
                 <label for="author">Autor</label>
-            </div><br>
-            <button type="submit" id="botonBusqueda" onclick="buscarPorFiltro()">Buscar</button>
+            </div>
+            <br />
+            <button
+                type="submit"
+                id="botonBusqueda"
+                onclick="mostrarResultados()"
+            >
+                Buscar
+            </button>
         </section>
 
-        <section id="contenedor2" class="container hidden">
-        </section>
-        <section id="contenedor3" class="container hidden">
-        </section>
+        <section id="contenedor2" class="container hidden"></section>
+        <section id="contenedor3" class="container hidden"></section>
 
         <script src="script.js"></script>
     </body>
