@@ -1,7 +1,9 @@
 // Elements obtained from the DOM
+const counter = document.getElementById("counter")
 const contenedor2 = document.getElementById("contenedor2")
 
-
+// Upon page load
+updateCartCounter() // in case there are books left in the cart
 
 // Functions
 function mostrarResultados() {
@@ -43,6 +45,13 @@ function addToCart(index) {
     let cart = getCartBooks()
     cart.push(books[index])
     localStorage.cart = JSON.stringify(cart)
+    updateCartCounter()
+}
+
+function updateCartCounter() {
+    let cart = getCartBooks()
+    const cartBookCount =cart.length
+    counter.innerText = cartBookCount
 }
 
 // mostrarResultados()
