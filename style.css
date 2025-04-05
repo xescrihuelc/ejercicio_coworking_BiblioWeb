@@ -146,3 +146,6 @@ img {
     background-color: #007bff;
     border-radius: 10px;
 }
+#buttonProcessCart {
+    cursor: pointer;
+}
