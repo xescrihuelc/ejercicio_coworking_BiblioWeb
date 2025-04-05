@@ -12,6 +12,27 @@ body {
     padding: 20px;
 }
 
+/* Content header styling */
+.content-header {
+    background-color: rgb(190, 101, 0);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#img-header {
+    min-width: 150px;
+    min-height: 200px;
+}
+
+#tituloH1 {
+    color: #fff;
+    font-size: 4em;
+    align-self: center;
+}
+
 .container {
     width: 100%;
     margin: 20;
@@ -25,6 +46,13 @@ body {
     border-radius: 8px;
     align-content: center;
     text-align: center;
+}
+
+#botonBusqueda {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1em;
+    padding: 10px;
 }
 
 h1 {
@@ -128,12 +156,6 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Shopping cart styles */
-#shopping-cart {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-}
-
 #cart-img {
     width: 50px;
     height: 50px;

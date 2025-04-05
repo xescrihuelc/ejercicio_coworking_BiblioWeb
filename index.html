@@ -7,16 +7,21 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1 id="tituloH1">BiblioWeb interactivo</h1>
-        <div id="shopping-cart">
-            <img
-                id="cart-img"
-                src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
-                alt="carrito"
-                onclick="viewCart()"
-            />
-            <span id="counter">0</span>
-        </div>
+
+        <section class="content-header">
+            <img id="img-header" src="image/library-header.jpg" alt="library">
+            <h1 id="tituloH1">BiblioWeb interactivo</h1>
+            <div id="shopping-cart">
+                <img
+                    id="cart-img"
+                    src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                    alt="carrito"
+                    onclick="viewCart()"
+                />
+                <span id="counter">0</span>
+            </div>
+        </section>
+        
         <section id="contenedor1" class="title-container">
             <label for="busqueda">Libros a buscar: </label>
             <input
