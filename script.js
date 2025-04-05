@@ -9,6 +9,7 @@ function fetchBooks() {
         fetch(`https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
+            contenedor2.innerHTML = "";
             mostrarResultados(data.docs);
         });
     }
