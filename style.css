@@ -47,20 +47,23 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
-  }
+}
 
-  button:hover {
+button:hover {
     background-color: #0056b3;
-  }
+}
 
-  img {
+img {
     width: 100px;
     height: 150px;
     border: 1px solid #000;
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+}
+img#cart-img {
+    cursor: pointer;
+}
+
 /* Individual card styling */
 .card {
     width: 80%;
@@ -70,8 +73,8 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
-    margin-top:10px;
-    margin-bottom:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Card image styling */
@@ -114,7 +117,7 @@ button {
 }
 
 /* Shopping cart styles */
-#shopping-cart{
+#shopping-cart {
     position: absolute;
     top: 20px;
     right: 50px;
@@ -125,7 +128,7 @@ button {
     height: 50px;
 }
 
-#counter{
+#counter {
     padding: 5px;
     color: #fff;
     background-color: #007bff;
