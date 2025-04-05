@@ -39,14 +39,19 @@ function mostrarResultados(books) {
         const card = document.createElement("div");
         card.classList.add("card");
         const imageURL = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`;
-        const authors = book.author_name.join(", ");
+        let authors = ""
+        if (book.author_name.length > 3) {
+            authors = book.author_name.splice(0,3).join(", ") + ", <i>et al</i>."
+        } else {
+            authors = book.author_name.join(", ") + "."
+        }
         card.innerHTML = `
                     <div class="card-image">
                         <img src="${imageURL}" alt="${book.title}">
                     </div>
                     <div class="card-content">
                         <h2 class="card-title">${book.title}</h2>
-                        <p><i>${authors}</i> (${book.first_publish_year})</p>
+                        <p>${authors} (${book.first_publish_year})</p>
                         <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromCart(${index})">Eliminar del carrito</button></span>
                     </div>
                 `;
