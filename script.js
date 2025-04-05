@@ -1,6 +1,12 @@
 // Elements obtained from the DOM
 const contenedor2 = document.getElementById("contenedor2");
 const searchBox = document.getElementById("busqueda");
+const counter = document.getElementById("counter");
+
+// Upon page load…
+let books = []
+updateCartCounter()  // In case there are books left in the cart from a previous session
+
 
 // Functions
 function fetchBooks() {
@@ -9,9 +15,10 @@ function fetchBooks() {
         fetch(`https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
-            contenedor2.innerHTML = "";
-            mostrarResultados(data.docs);
-        });
+            contenedor2.innerHTML = ""
+            books = data.docs
+            mostrarResultados(books)
+        })
     }
 
 function mostrarResultados(books) {
@@ -20,8 +27,6 @@ function mostrarResultados(books) {
         const card = document.createElement("div");
         card.classList.add("card");
         const imageURL = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`;
-        console.log(imageURL);
-
         const authors = book.author_name.join(", ");
         card.innerHTML = `
                     <div class="card-image">
@@ -40,7 +45,7 @@ function mostrarResultados(books) {
 
 function getCartBooks() {
     if (!localStorage.cart) {
-        localStorage.cart = [];
+        localStorage.cart = '[]';
     }
     let cart = JSON.parse(localStorage.cart);
     return cart;
@@ -52,6 +57,14 @@ function addToCart(index) {
     let cart = getCartBooks();
     cart.push(books[index]);
     localStorage.cart = JSON.stringify(cart);
+    updateCartCounter()
 }
+
+function updateCartCounter() {
+    let cart = getCartBooks();
+    counter.innerText = cart.length
+}
+
+
 
 // mostrarResultados()
