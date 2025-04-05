@@ -53,10 +53,18 @@
             <h1>Cesta de Libros</h1>
             <div id="booksCart"></div>
             <!-- Add name of the function here -->
-            <button type="button" id="buttonProcessCart" onclick="">
+            <button type="button" id="buttonProcessCart" onclick="processPurchase()">
                 Procesar Compra
             </button>
         </section>
+        <div id="purchase-processed" class="modal hidden">
+            <!-- Modal content -->
+            <div class="modal-content">
+            <span id="purchase-success-modal-close" class="close" onclick="closePurchaseSuccessModal()">&times;</span>
+            <p id="purchase-success-message"></p>
+            </div>
+        </div>
+  
 
         <script src="script.js"></script>
     </body>
