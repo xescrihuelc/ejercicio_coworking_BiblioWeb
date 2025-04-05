@@ -1,25 +1,28 @@
 // Elements obtained from the DOM
+const contenedor1 = document.getElementById("contenedor1");
 const contenedor2 = document.getElementById("contenedor2");
+const contenedor3 = document.getElementById("contenedor3");
 const searchBox = document.getElementById("busqueda");
 const counter = document.getElementById("counter");
 
 // Upon page load…
-let books = []
-updateCartCounter()  // In case there are books left in the cart from a previous session
-
+let books = [];
+updateCartCounter(); // In case there are books left in the cart from a previous session
 
 // Functions
 function fetchBooks() {
     let opcion = document.querySelector('input[name="filtro"]:checked').value;
-        console.log(opcion);
-        fetch(`https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`)
+    console.log(opcion);
+    fetch(
+        `https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`
+    )
         .then((resp) => resp.json())
         .then((data) => {
-            contenedor2.innerHTML = ""
-            books = data.docs
-            mostrarResultados(books)
-        })
-    }
+            contenedor2.innerHTML = "";
+            books = data.docs;
+            mostrarResultados(books);
+        });
+}
 
 function mostrarResultados(books) {
     for (let index = 0; index < books.length; index++) {
@@ -45,7 +48,7 @@ function mostrarResultados(books) {
 
 function getCartBooks() {
     if (!localStorage.cart) {
-        localStorage.cart = '[]'
+        localStorage.cart = "[]";
     }
     let cart = JSON.parse(localStorage.cart)
     return cart
@@ -85,9 +88,13 @@ function deleteFromCart(index) {
 
 function updateCartCounter() {
     let cart = getCartBooks();
-    counter.innerText = cart.length
+    counter.innerText = cart.length;
 }
 
-
+function viewCart() {
+    contenedor1.classList.add("hidden");
+    contenedor2.classList.add("hidden");
+    contenedor3.classList.remove("hidden");
+}
 
 // mostrarResultados()

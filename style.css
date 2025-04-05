@@ -84,8 +84,8 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
-    margin-top:10px;
-    margin-bottom:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Card image styling */
@@ -128,7 +128,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Shopping cart styles */
-#shopping-cart{
+#shopping-cart {
     position: absolute;
     top: 20px;
     right: 50px;
@@ -139,7 +139,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 50px;
 }
 
-#counter{
+#counter {
     padding: 5px;
     color: #fff;
     background-color: #007bff;
