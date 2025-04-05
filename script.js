@@ -35,29 +35,33 @@ function mostrarResultados(books) {
                     <div class="card-content">
                         <h2 class="card-title">${book.title}</h2>
                         <p><i>${authors}</i> (${book.first_publish_year})</p>
-                        <p><button id="${index}" onclick="addToCart(${index})">Añadir al carrito</button></p>
+                        <span><button id="Add${index}" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="hidden" onclick="deleteFromCart(${index})">Eliminar del carrito</button></span>
                     </div>
-                `;
-        contenedor2.appendChild(card);
+                `
+        contenedor2.appendChild(card)
     }
-    contenedor2.classList.remove("hidden");
+    contenedor2.classList.remove("hidden")
 }
 
 function getCartBooks() {
     if (!localStorage.cart) {
-        localStorage.cart = '[]';
+        localStorage.cart = '[]'
     }
-    let cart = JSON.parse(localStorage.cart);
-    return cart;
+    let cart = JSON.parse(localStorage.cart)
+    return cart
 }
 
 function addToCart(index) {
     // The book to add to the cart is books[index]
     // First get the cart contents
-    let cart = getCartBooks();
-    cart.push(books[index]);
-    localStorage.cart = JSON.stringify(cart);
+    const addButton = document.getElementById(`Add${index}`)
+    const delButton = document.getElementById(`Del${index}`)
+    let cart = getCartBooks()
+    cart.push(books[index])
+    localStorage.cart = JSON.stringify(cart)
     updateCartCounter()
+    addButton.classList.add("hidden")
+    delButton.classList.remove("hidden")
 }
 
 function updateCartCounter() {
