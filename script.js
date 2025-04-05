@@ -4,11 +4,20 @@ const contenedor2 = document.getElementById("contenedor2");
 const contenedor3 = document.getElementById("contenedor3");
 const searchBox = document.getElementById("busqueda");
 const counter = document.getElementById("counter");
+const purchaseProcessedModal = document.getElementById("purchase-processed");
+const purchaseSuccess = document.getElementById("purchase-success-message");
+const purchaseSuccessClose = document.getElementById("purchase-success-modal-close");
 
 // Upon page load…
 let books = [];
 updateCartCounter(); // In case there are books left in the cart from a previous session
+window.onclick = function(event) {
+    if (event.target == purchaseProcessedModal) {
+        purchaseProcessedModal.classList.add("hidden");
+    }
+}
 
+  
 // Functions
 function fetchBooks() {
     let opcion = document.querySelector('input[name="filtro"]:checked').value;
@@ -60,6 +69,10 @@ function addToCart(index) {
     const delButton = document.getElementById(`Del${index}`);
     // First get the cart contents
     let cart = getCartBooks();
+    if (!books[index].purchaseQuantity) {
+        books[index].purchaseQuantity = 0
+    }
+    books[index].purchaseQuantity++
     cart.push(books[index]);
     localStorage.cart = JSON.stringify(cart);
     updateCartCounter();
@@ -73,6 +86,7 @@ function deleteFromCart(index) {
     const delButton = document.getElementById(`Del${index}`);
     // First get the cart contents
     let cart = getCartBooks();
+    books[index].purchaseQuantity = 0
     // We have to find this book in the cart
     for (let cartIndex = 0; cartIndex < cart.length; cartIndex++) {
         if (books[index].key === cart[cartIndex].key) {
@@ -116,13 +130,32 @@ function viewCart() {
 
 function findBookQuantity(title_book) {
     let countBook = 0;
-    const books = getCartBooks();
+    const books = getCartBooks()
     books.forEach((book) => {
         if (book.title == title_book) {
-            countBook++;
+            countBook++
         }
     });
-    return countBook;
+    return countBook
 }
 
-// mostrarResultados()
+function processPurchase() {
+    const books = getCartBooks()
+    let numberOfBooks = 0
+    books.forEach((book) => {
+        numberOfBooks += book.purchaseQuantity
+    })
+    purchaseSuccess.innerHTML = `
+    <h2>¡CHA-CHING!</h2>
+    <br />
+    <p>Compra realizada con éxito</p>
+    <p>Ha comprado un total de ${numberOfBooks} libros</p>
+    <p>Hemos vaciado su cuenta corriente</p>
+    `
+    purchaseProcessedModal.classList.remove("hidden");
+}
+
+function closePurchaseSuccessModal(params) {
+    purchaseProcessedModal.classList.add("hidden");
+}
+
