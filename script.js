@@ -9,13 +9,15 @@ let books = []
 
 // Functions
 function fetchBooks() {
-    fetch(`https://openlibrary.org/search.json?q=${searchBox.value}&limit=10`)
+    let opcion = document.querySelector('input[name="filtro"]:checked').value;
+        console.log(opcion);
+        fetch(`https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
             books = data.docs
             mostrarResultados(books)
     })
-}
+    }
 
 function mostrarResultados(books) {
     for (let index = 0; index < books.length; index++) {
@@ -36,6 +38,7 @@ function mostrarResultados(books) {
                 `;
         contenedor2.appendChild(card);
     }
+    contenedor2.classList.remove("hidden");
     if (books) {
         contenedor2.classList.remove("hidden")
     }
@@ -65,4 +68,3 @@ function updateCartCounter() {
 }
 
 // mostrarResultados()
-// 
