@@ -5,14 +5,16 @@ const searchBox = document.getElementById("busqueda");// Upon page load
 
 // Upon page load
 updateCartCounter() // in case there are books left in the cart
+let books = []
 
 // Functions
 function fetchBooks() {
     fetch(`https://openlibrary.org/search.json?q=${searchBox.value}&limit=10`)
         .then((resp) => resp.json())
         .then((data) => {
-            mostrarResultados(data.docs);
-        });
+            books = data.docs
+            mostrarResultados(books)
+    })
 }
 
 function mostrarResultados(books) {
@@ -34,14 +36,17 @@ function mostrarResultados(books) {
                 `;
         contenedor2.appendChild(card);
     }
+    if (books) {
+        contenedor2.classList.remove("hidden")
+    }
 }
 
 function getCartBooks() {
     if (!localStorage.cart) {
-        localStorage.cart = [];
+        localStorage.cart = '[]'
     }
-    let cart = JSON.parse(localStorage.cart);
-    return cart;
+    let bookCart = JSON.parse(localStorage.cart);
+    return bookCart;
 }
 
 function addToCart(index) {
@@ -60,4 +65,4 @@ function updateCartCounter() {
 }
 
 // mostrarResultados()
-// contenedor2.classList.remove("hidden")
+// 
