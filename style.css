@@ -27,7 +27,7 @@ body {
     min-height: 200px;
 }
 
-#tituloH1 {
+#titleH1 {
     color: #fff;
     font-size: 4em;
     align-self: center;
@@ -48,7 +48,7 @@ body {
     text-align: center;
 }
 
-#botonBusqueda {
+#btn-search {
     background-color: #007bff;
     color: #fff;
     font-size: 1em;
@@ -57,10 +57,9 @@ body {
     cursor: pointer;
 }
 
-#botonBusqueda:hover {
+#btn-search:hover {
     background-color: #0251a7;
 }
-
 
 h1 {
     color: #333;
