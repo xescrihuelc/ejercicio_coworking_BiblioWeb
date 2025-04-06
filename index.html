@@ -10,46 +10,46 @@
 
         <section class="content-header">
             <img id="img-header" src="image/library-header.jpg" alt="library">
-            <h1 id="tituloH1">BiblioWeb interactivo</h1>
+            <h1 id="titleH1">BiblioWeb interactivo</h1>
             <div id="shopping-cart">
                 <img
                     id="cart-img"
                     src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
-                    alt="carrito"
+                    alt="cart"
                     onclick="viewCart()"
                 />
                 <span id="counter">0</span>
             </div>
         </section>
         
-        <section id="contenedor1" class="title-container">
-            <label for="busqueda">Libros a buscar: </label>
+        <section id="container1" class="title-container">
+            <label for="search">Libros a buscar: </label>
             <input
                 type="text"
-                name="busqueda"
-                id="busqueda"
+                name="search"
+                id="search"
                 autofocus
             /><br /><br />
-            <div id="menuFiltro">
+            <div id="filterMneu">
                 <input
                     type="radio"
-                    name="filtro"
+                    name="filter"
                     id="title"
                     value="title"
                     checked
                 />
                 <label for="title">Título</label>
-                <input type="radio" name="filtro" id="author" value="author" />
+                <input type="radio" name="filter" id="author" value="author" />
                 <label for="author">Autor</label>
             </div>
             <br />
-            <button type="submit" id="botonBusqueda" onclick="fetchBooks()">
+            <button type="submit" id="btn-search" onclick="fetchBooks()">
                 Buscar
             </button>
         </section>
 
-        <section id="contenedor2" class="container hidden"></section>
-        <section id="contenedor3" class="container hidden">
+        <section id="container2" class="container hidden"></section>
+        <section id="container3" class="container hidden">
             <h1>Cesta de Libros</h1>
             <button type="submit" class="purchase-button" id="buttonProcessCart1" onclick="processPurchase()">Procesar Compra</button><br />
             <div id="booksCart"></div><br />
