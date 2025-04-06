@@ -10,6 +10,7 @@ const purchaseSuccess = document.getElementById("purchase-success-message");
 const purchaseSuccessClose = document.getElementById("purchase-success-modal-close");
 const deleteCartBtn = document.getElementById("deleteCartBtn");
 const buttonProcessCartBtn = document.getElementById("buttonProcessCartBtn");
+const homeBtn = document.getElementById("homeBtn");
 
 let books = [];
 window.onclick = function(event) {
@@ -31,6 +32,9 @@ function main() {
     container1.classList.remove("hidden");
     container2.classList.add("hidden");
     container3.classList.add("hidden");
+    deleteCartBtn.classList.remove("hidden");
+    buttonProcessCartBtn.classList.remove("hidden");
+    homeBtn.classList.add("hidden");
 }
 
 function fetchBooks() {
@@ -146,6 +150,7 @@ function viewCart() {
     if (cart.length == 0) {
         deleteCartBtn.classList.add("hidden");
         buttonProcessCartBtn.classList.add("hidden");
+        homeBtn.classList.remove("hidden");
         booksCart.innerHTML = "<h1>El carrito está vacío.</h1>"
     }
     for (let index = 0; index < cart.length; index++) {
