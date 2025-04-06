@@ -1,9 +1,9 @@
 // Elements obtained from the DOM
-const contenedor1 = document.getElementById("contenedor1");
-const contenedor2 = document.getElementById("contenedor2");
-const contenedor3 = document.getElementById("contenedor3");
+const container1 = document.getElementById("container1");
+const container2 = document.getElementById("container2");
+const container3 = document.getElementById("container3");
 const booksCart = document.getElementById("booksCart");
-const searchBox = document.getElementById("busqueda");
+const searchBox = document.getElementById("search");
 const counter = document.getElementById("counter");
 const purchaseProcessedModal = document.getElementById("purchase-processed");
 const purchaseSuccess = document.getElementById("purchase-success-message");
@@ -26,28 +26,28 @@ function main() {
     // Upon page load…
     books = [];
     updateCartCounter(); // In case there are books left in the cart from a previous session
-    contenedor2.innerHTML = ""
+    container2.innerHTML = ""
     booksCart.innerHTML = ""
-    contenedor1.classList.remove("hidden");
-    contenedor2.classList.add("hidden");
-    contenedor3.classList.add("hidden");
+    container1.classList.remove("hidden");
+    container2.classList.add("hidden");
+    container3.classList.add("hidden");
 }
 
 function fetchBooks() {
-    let opcion = document.querySelector('input[name="filtro"]:checked').value;
-    console.log(opcion);
+    let option = document.querySelector('input[name="filter"]:checked').value;
+    console.log(option);
     fetch(
-        `https://openlibrary.org/search.json?${opcion}=${searchBox.value}&limit=10`
+        `https://openlibrary.org/search.json?${option}=${searchBox.value}&limit=10`
     )
         .then((resp) => resp.json())
         .then((data) => {
-            contenedor2.innerHTML = "";
+            container2.innerHTML = "";
             books = data.docs;
-            mostrarResultados(books);
+            showResults(books);
         });
 }
 
-function mostrarResultados(books) {
+function showResults(books) {
     for (let index = 0; index < books.length; index++) {
         const book = books[index];
         const card = document.createElement("div");
@@ -69,9 +69,9 @@ function mostrarResultados(books) {
                 <span><button id="Add${index}" class="blue-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="red-button hidden" onclick="deleteFromSearch(${index})">Eliminar del carrito</button></span>
             </div>
         `;
-        contenedor2.appendChild(card);
+        container2.appendChild(card);
     }
-    contenedor2.classList.remove("hidden");
+    container2.classList.remove("hidden");
 }
 
 function getCartBooks() {
@@ -183,9 +183,9 @@ function viewCart() {
         })
     }
     // Hide containers 1 & 2 and unhide container 3
-    contenedor1.classList.add("hidden");
-    contenedor2.classList.add("hidden");
-    contenedor3.classList.remove("hidden");
+    container1.classList.add("hidden");
+    container2.classList.add("hidden");
+    container3.classList.remove("hidden");
 }
 
 function processPurchase() {
@@ -206,6 +206,7 @@ function processPurchase() {
 
 function closePurchaseSuccessModal(params) {
     purchaseProcessedModal.classList.add("hidden");
+    localStorage.setItem("cart", "")
     main()
 }
 
