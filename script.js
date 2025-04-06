@@ -64,14 +64,13 @@ function mostrarResultados(books) {
             <div class="card-content">
                 <h2 class="card-title">${book.title}</h2>
                 <p>${authors} (${book.first_publish_year})</p>
-                <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromCart(${index})">Eliminar del carrito</button></span>
+                <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromSearch(${index})">Eliminar del carrito</button></span>
             </div>
         `;
         contenedor2.appendChild(card);
     }
     contenedor2.classList.remove("hidden");
 }
-
 
 function getCartBooks() {
     if (!localStorage.cart) {
@@ -98,7 +97,7 @@ function addToCart(index) {
     delButton.classList.remove("hidden");
 }
 
-function deleteFromCart(index) {
+function deleteFromSearch(index) {
     // The book to delete from the cart is books[index]
     const addButton = document.getElementById(`Add${index}`);
     const delButton = document.getElementById(`Del${index}`);
@@ -116,6 +115,16 @@ function deleteFromCart(index) {
     updateCartCounter();
     addButton.classList.remove("hidden");
     delButton.classList.add("hidden");
+}
+
+function deleteFromCart(index) {
+    // First get the cart contents
+    let cart = getCartBooks();
+    cart.splice(index, 1);
+    localStorage.cart = JSON.stringify(cart);
+    booksCart.innerHTML = ""
+    viewCart()
+    updateCartCounter();
 }
 
 function updateCartCounter() {
@@ -144,12 +153,20 @@ function viewCart() {
         booksCart.appendChild(card);
         const quantityInput = document.getElementById(`Q${index}`)
         quantityInput.addEventListener("focusout", () => {
-            cartBook.purchaseQuantity = quantityInput.value
-            localStorage.cart = JSON.stringify(cart);
+            if (Number(quantityInput.value) == 0) {
+                deleteFromCart(index)
+            } else {
+                cartBook.purchaseQuantity = Number(quantityInput.value)
+                localStorage.cart = JSON.stringify(cart);
+            }
         })
         quantityInput.addEventListener("keypress", () => {
-            cartBook.purchaseQuantity = quantityInput.value
-            localStorage.cart = JSON.stringify(cart);
+            if (Number(quantityInput.value) == 0) {
+                deleteFromCart(index)
+            } else {
+                cartBook.purchaseQuantity = Number(quantityInput.value)
+                localStorage.cart = JSON.stringify(cart);
+            }
         })
     }
     // Hide containers 1 & 2 and unhide container 3
