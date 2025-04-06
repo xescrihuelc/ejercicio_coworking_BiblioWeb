@@ -2,23 +2,35 @@
 const contenedor1 = document.getElementById("contenedor1");
 const contenedor2 = document.getElementById("contenedor2");
 const contenedor3 = document.getElementById("contenedor3");
+const booksCart = document.getElementById("booksCart");
 const searchBox = document.getElementById("busqueda");
 const counter = document.getElementById("counter");
 const purchaseProcessedModal = document.getElementById("purchase-processed");
 const purchaseSuccess = document.getElementById("purchase-success-message");
 const purchaseSuccessClose = document.getElementById("purchase-success-modal-close");
 
-// Upon page load…
 let books = [];
-updateCartCounter(); // In case there are books left in the cart from a previous session
 window.onclick = function(event) {
     if (event.target == purchaseProcessedModal) {
         purchaseProcessedModal.classList.add("hidden");
+        main()
     }
 }
+main()
 
   
 // Functions
+function main() {
+    // Upon page load…
+    books = [];
+    updateCartCounter(); // In case there are books left in the cart from a previous session
+    contenedor2.innerHTML = ""
+    booksCart.innerHTML = ""
+    contenedor1.classList.remove("hidden");
+    contenedor2.classList.add("hidden");
+    contenedor3.classList.add("hidden");
+}
+
 function fetchBooks() {
     let opcion = document.querySelector('input[name="filtro"]:checked').value;
     console.log(opcion);
@@ -46,19 +58,20 @@ function mostrarResultados(books) {
             authors = book.author_name.join(", ") + "."
         }
         card.innerHTML = `
-                    <div class="card-image">
-                        <img src="${imageURL}" alt="${book.title}">
-                    </div>
-                    <div class="card-content">
-                        <h2 class="card-title">${book.title}</h2>
-                        <p>${authors} (${book.first_publish_year})</p>
-                        <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromCart(${index})">Eliminar del carrito</button></span>
-                    </div>
-                `;
+            <div class="card-image">
+                <img class="search-img" src="${imageURL}" alt="${book.title}">
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">${book.title}</h2>
+                <p>${authors} (${book.first_publish_year})</p>
+                <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromCart(${index})">Eliminar del carrito</button></span>
+            </div>
+        `;
         contenedor2.appendChild(card);
     }
     contenedor2.classList.remove("hidden");
 }
+
 
 function getCartBooks() {
     if (!localStorage.cart) {
@@ -112,43 +125,44 @@ function updateCartCounter() {
 
 function viewCart() {
     // Get items from the cart
-    const cartItems = getCartBooks();
-    const bookTitle = Array();
-    const bookImage = Array();
-    const bookQuantity = Array();
-    console.log(cartItems);
-
-    cartItems.forEach((book) => {
-        bookTitle.push(book.title);
-        bookImage.push(
-            `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}.jpg`
-        );
-        bookQuantity.push(findBookQuantity(book.title));
-    });
-    console.log(bookTitle, bookImage, bookQuantity);
-
+    let cart = getCartBooks();
+    for (let index = 0; index < cart.length; index++) {
+        const cartBook = cart[index];
+        const card = document.createElement("div");
+        card.classList.add("cart-card");
+        const imageURL = `https://covers.openlibrary.org/b/olid/${cartBook.cover_edition_key}.jpg`;
+        card.innerHTML = `
+            <div class="cart-image">
+                <img class="cart-img" src="${imageURL}" alt="${cartBook.title}">
+            </div>
+            <div class="cart-content">
+                <h2 class="cart-title">${cartBook.title}</h2>
+                <label for="quantity">Cantidad: </label>
+                <input type="number" name="quantity" id="Q${index}" value="${cartBook.purchaseQuantity}" required size="5" min="0" max="10"/>
+            </div>
+        `;
+        booksCart.appendChild(card);
+        const quantityInput = document.getElementById(`Q${index}`)
+        quantityInput.addEventListener("focusout", () => {
+            cartBook.purchaseQuantity = quantityInput.value
+            localStorage.cart = JSON.stringify(cart);
+        })
+        quantityInput.addEventListener("keypress", () => {
+            cartBook.purchaseQuantity = quantityInput.value
+            localStorage.cart = JSON.stringify(cart);
+        })
+    }
     // Hide containers 1 & 2 and unhide container 3
     contenedor1.classList.add("hidden");
     contenedor2.classList.add("hidden");
     contenedor3.classList.remove("hidden");
 }
 
-function findBookQuantity(title_book) {
-    let countBook = 0;
-    const books = getCartBooks()
-    books.forEach((book) => {
-        if (book.title == title_book) {
-            countBook++
-        }
-    });
-    return countBook
-}
-
 function processPurchase() {
     const books = getCartBooks()
     let numberOfBooks = 0
     books.forEach((book) => {
-        numberOfBooks += book.purchaseQuantity
+        numberOfBooks += Number(book.purchaseQuantity)
     })
     purchaseSuccess.innerHTML = `
     <h2>¡CHA-CHING!</h2>
@@ -162,5 +176,6 @@ function processPurchase() {
 
 function closePurchaseSuccessModal(params) {
     purchaseProcessedModal.classList.add("hidden");
+    main()
 }
 
