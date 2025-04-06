@@ -8,6 +8,8 @@ const counter = document.getElementById("counter");
 const purchaseProcessedModal = document.getElementById("purchase-processed");
 const purchaseSuccess = document.getElementById("purchase-success-message");
 const purchaseSuccessClose = document.getElementById("purchase-success-modal-close");
+const deleteCartBtn = document.getElementById("deleteCartBtn");
+const buttonProcessCartBtn = document.getElementById("buttonProcessCartBtn");
 
 let books = [];
 window.onclick = function(event) {
@@ -64,7 +66,7 @@ function mostrarResultados(books) {
             <div class="card-content">
                 <h2 class="card-title">${book.title}</h2>
                 <p>${authors} (${book.first_publish_year})</p>
-                <span><button id="Add${index}" class="add-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="del-button hidden" onclick="deleteFromSearch(${index})">Eliminar del carrito</button></span>
+                <span><button id="Add${index}" class="blue-button" onclick="addToCart(${index})">Añadir al carrito</button><button id="Del${index}" class="red-button hidden" onclick="deleteFromSearch(${index})">Eliminar del carrito</button></span>
             </div>
         `;
         contenedor2.appendChild(card);
@@ -122,7 +124,12 @@ function deleteFromCart(index) {
     let cart = getCartBooks();
     cart.splice(index, 1);
     localStorage.cart = JSON.stringify(cart);
-    booksCart.innerHTML = ""
+    viewCart()
+    updateCartCounter();
+}
+
+function deleteCart() {
+    localStorage.cart = "[]"
     viewCart()
     updateCartCounter();
 }
@@ -133,8 +140,14 @@ function updateCartCounter() {
 }
 
 function viewCart() {
+    booksCart.innerHTML = ""
     // Get items from the cart
     let cart = getCartBooks();
+    if (cart.length == 0) {
+        deleteCartBtn.classList.add("hidden");
+        buttonProcessCartBtn.classList.add("hidden");
+        booksCart.innerHTML = "<h1>El carrito está vacío.</h1>"
+    }
     for (let index = 0; index < cart.length; index++) {
         const cartBook = cart[index];
         const card = document.createElement("div");

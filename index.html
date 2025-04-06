@@ -43,17 +43,19 @@
                 <label for="author">Autor</label>
             </div>
             <br />
-            <button type="submit" id="botonBusqueda" onclick="fetchBooks()">
+            <button type="submit" class="blue-button" id="botonBusqueda" onclick="fetchBooks()">
                 Buscar
             </button>
         </section>
 
         <section id="contenedor2" class="container hidden"></section>
         <section id="contenedor3" class="container hidden">
-            <h1>Cesta de Libros</h1>
-            <button type="submit" class="purchase-button" id="buttonProcessCart1" onclick="processPurchase()">Procesar Compra</button><br />
+            <h1>Carrito de la compra</h1>
             <div id="booksCart"></div><br />
-            <button type="submit" class="purchase-button" id="buttonProcessCart2" onclick="processPurchase()">Procesar Compra</button><br />
+            <span>
+                <button type="button" class="red-button" id="deleteCartBtn" onclick="deleteCart()">Vaciar carrito</button>
+                <button type="submit" class="blue-button" id="buttonProcessCartBtn" onclick="processPurchase()">Procesar Compra</button><br />
+            </span>
         </section>
         <div id="purchase-processed" class="modal hidden">
             <!-- Modal content -->
